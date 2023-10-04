@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-hex: #1c1c1c;
+  --foreground-rgb: 28, 28, 28;
+  --contrast-hex: #FFFFFF;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 214, 219, 220;
+  --main-color: #f7df1e;
+}
+
+[data-theme="dark"]  {
+    --foreground-hex: #FFFFFF;
+    --foreground-rgb: 255, 255, 255;
+    --contrast-hex: #1c1c1c;
+    --background-start-rgb: 28, 28, 28;
+    --background-end-rgb: 28, 28, 28;
+    --main-color: #f7df1e;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scrollbar-width: none;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+
+  a {
+    &:hover{
+      color: var(--main-color);
+      > * {
+        color: var(--main-color);
+      }
+    }
+
+    &.logo {
+      color: var(--foreground-rgb);
+      &:hover {
+        > * {
+          color: var(--foreground-rgb);
+        }
+      }
+    }
+  }
+
+  .logo,
+  .main {
+    font-family: var(--font-primary);
+  }
+
+  .light-bg {
+    background-color: rgba(var(--foreground-rgb), 0.1);
+  }
+
+  .results {
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: column wrap;
+  }
+
+  .card {
+    width: fit-content;
+  }
+}

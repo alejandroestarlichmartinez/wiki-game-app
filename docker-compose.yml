@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      target: ${STAGE}
+      dockerfile: Dockerfile
+
+    image: wiki-game-app:${APP_VERSION}
+
+    volumes:
+      - .:/
+      - /node_modules
+
+    container_name: wiki-game
+    ports:
+      - ${PORT}:${PORT}
+    environment:
+      - APP_VERSION=${APP_VERSION}
+      - STAGE=${STAGE}
+      - PORT=${PORT}
+      - API_URL=${API_URL}
+      - API_KEY=${API_KEY}

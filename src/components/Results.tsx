@@ -37,7 +37,7 @@ export function Results({ results }: Props) {
      {Array.from({ length: columnsNumber }).map((_, index) => {
         rootIndex >= columnsNumber ? rootIndex = 0 : rootIndex = index;
         return (
-          <div>
+          <div key={index}>
             {results.map((result, index) => {
               if (index % columnsNumber === rootIndex) {
                 return <Card

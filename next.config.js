@@ -5,7 +5,8 @@ const nextConfig = {
   },
   images: {
     domains: ['cdn.mobygames.com'],
-  }
+  },
+  output: 'standalone',
 }
 
 module.exports = nextConfig

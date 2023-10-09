@@ -10,7 +10,7 @@ services:
 
     container_name: wiki-game
     ports:
-      - ${PORT}:${PORT}
+      - 3000:3000
     environment:
       - APP_VERSION=${APP_VERSION}
       - STAGE=${STAGE}

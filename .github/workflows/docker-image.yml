@@ -34,7 +34,7 @@ jobs:
         API_URL: ${{ github.env.API_URL }}
         API_KEY: ${{ github.env.API_KEY }}
       with:
-        compose-file: docker-compose.prod.yml
+        compose-file: "./docker-compose.prod.yml"
         
     - name: Docker login
       env:

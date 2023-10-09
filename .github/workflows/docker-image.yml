@@ -22,6 +22,7 @@ jobs:
       uses: isbang/compose-action@v1.5.1
       with:
         compose-file: "./docker-compose.prod.yml"
+        env_file: ${{ github.env.file }}
 
     - name: Git Semantic Version
       uses: paulhatch/semantic-version@v4.0.3
@@ -35,15 +36,16 @@ jobs:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
-        echo "Secret is ${{ secrets.API_KEY }}"
-        echo "PORT is ${{ env.PORT }}"
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
     - name: Build Docker Image
       env:
-        PORT: ${{ env.PORT }}
+        PORT: ${{ github.env.PORT }}
+        APP_VERSION: ${{ steps.version.outputs.version }}
+        STAGE: prod
+        API_URL: ${{ github.env.API_URL }}
+        API_KEY: ${{ github.env.API_KEY }}
       run: |
-        echo "My port is $PORT"
         docker compose build
 
     - name: Push Docker Image

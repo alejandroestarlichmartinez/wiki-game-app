@@ -1,4 +1,4 @@
-name: Docker Image CI
+tname: Docker Image CI
 
 on:
   push:
@@ -41,6 +41,7 @@ jobs:
       env:
         PORT: ${{ env.PORT }}
       run: |
+        echo "My port is $PORT"
         docker compose build
 
     - name: Push Docker Image

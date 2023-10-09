@@ -30,7 +30,7 @@ jobs:
       with:
         compose-file: "./docker-compose.prod.yml"
       env:
-        PORT: ${{ github.env.PORT }}
+        PORT: ${{ env.PORT }}
         APP_VERSION: ${{ steps.version.outputs.version }}
         STAGE: prod
         API_URL: ${{ github.env.API_URL }}

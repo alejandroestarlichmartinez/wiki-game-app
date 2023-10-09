@@ -18,18 +18,23 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Composes File
-      uses: isbang/compose-action@v1.5.1
-      with:
-        compose-file: docker-compose.prod.yml
-        env_file: ${{ github.env.file }}
-
     - name: Git Semantic Version
       uses: paulhatch/semantic-version@v4.0.3
       with:
         major_pattern: "major:"
         minor_pattern: "feat:"
         format: "${major}.${minor}.${patch}-prerelease${increment}"
+
+    - name: Composes File
+      uses: isbang/compose-action@v1.5.1
+      env:
+        PORT: ${{ github.env.PORT }}
+        APP_VERSION: ${{ steps.version.outputs.version }}
+        STAGE: prod
+        API_URL: ${{ github.env.API_URL }}
+        API_KEY: ${{ github.env.API_KEY }}
+      with:
+        compose-file: docker-compose.prod.yml
         
     - name: Docker login
       env:

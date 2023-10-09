@@ -24,17 +24,6 @@ jobs:
         major_pattern: "major:"
         minor_pattern: "feat:"
         format: "${major}.${minor}.${patch}-prerelease${increment}"
-
-    - name: Composes File
-      uses: isbang/compose-action@v1.5.1
-      with:
-        compose-file: "./docker-compose.prod.yml"
-      env:
-        PORT: 3000
-        APP_VERSION: 1.0.0
-        STAGE: prod
-        API_URL: https://api.mobygames.com/v1/
-        API_KEY: moby_iSUUGkxU4TiGPCfCSBZdgJPBH1T
         
     - name: Docker login
       env:
@@ -44,14 +33,15 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
     - name: Build Docker Image
+      uses: isbang/compose-action@v1.5.1
+      with:
+        compose-file: "./docker-compose.prod.yml"
       env:
-        PORT: ${{ github.env.PORT }}
+        PORT: ${{ vars.PORT }}
         APP_VERSION: ${{ steps.version.outputs.version }}
         STAGE: prod
-        API_URL: ${{ github.env.API_URL }}
+        API_URL: ${{ env.API_URL }}
         API_KEY: ${{ github.env.API_KEY }}
-      run: |
-        docker compose build
 
     - name: Push Docker Image
       env:

@@ -21,7 +21,7 @@ jobs:
     - name: Composes File
       uses: isbang/compose-action@v1.5.1
       with:
-        compose-file: "./docker-compose.prod.yml"
+        compose-file: docker-compose.prod.yml
         env_file: ${{ github.env.file }}
 
     - name: Git Semantic Version

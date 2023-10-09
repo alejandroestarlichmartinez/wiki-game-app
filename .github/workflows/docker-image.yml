@@ -30,11 +30,11 @@ jobs:
       with:
         compose-file: "./docker-compose.prod.yml"
       env:
-        PORT: ${{ env.PORT }}
-        APP_VERSION: ${{ steps.version.outputs.version }}
+        PORT: 3000
+        APP_VERSION: 1.0.0
         STAGE: prod
-        API_URL: ${{ github.env.API_URL }}
-        API_KEY: ${{ github.env.API_KEY }}
+        API_URL: https://api.mobygames.com/v1/
+        API_KEY: moby_iSUUGkxU4TiGPCfCSBZdgJPBH1T
         
     - name: Docker login
       env:
